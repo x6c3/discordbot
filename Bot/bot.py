@@ -26,7 +26,7 @@ bot = UserWelcome(command_prefix=">", intents=intents)
 
 @bot.command()
 async def nsfw(ctx):
-    keyword = 'nudes'
+    keyword = 'memes'
     num_posts = 5 
 
     url = f'https://www.reddit.com/r/{keyword}/top/.json?limit={num_posts}'
@@ -34,17 +34,17 @@ async def nsfw(ctx):
     posts = requests.get(url, headers=headers)
     data = posts.json()
 
-    nsfw_posts = [
+    memes = [
         post['data']['url'] 
         for post in data['data']['children'] 
         if 'preview' in post['data'] and 'images' in post['data']['preview']
     ]
 
     
-    random.shuffle(nsfw_posts)
+    random.shuffle(memes)
 
   
-    for nsfw in nsfw_posts:
-        await ctx.send(nsfw)
+    for memes in memes:
+        await ctx.send(memes)
 
 bot.run(token)
